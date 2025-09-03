@@ -1,0 +1,22 @@
+# AD Sync Agent Configuration
+userflow_api:
+  base_url: "https://dev.api.authsec.dev"  # Replace with your UserFlow API URL        # Replace with actual auth token
+  tenant_id: "76d9a8f3-4a94-4a66-8c4a-d48d60b7ce0c"             # Replace with actual tenant ID
+  project_id: "d42bc07e-42d6-420e-ad55-67d166614309"
+  client_id: "76d9a8f3-4a94-4a66-8c4a-d48d60b7ce0c"  
+  skip_verify: true                            # Set to false in production with proper SSL
+
+active_directory:
+  server: "localhost:389"                      # Local AD server
+  username: "authnull\\authnull"               # Your AD credentials
+  password: "Xlncxlnc12345%"                   # Your AD password
+  base_dn: "CN=Users,DC=authnull,DC=com"       # Base DN for users
+  filter: "(&(objectClass=user)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))"  # Active users only
+  use_ssl: false                               # Set to true for LDAPS (port 636)
+  skip_verify: true                            # Skip SSL verification for testing
+
+sync_settings:
+  interval_minutes: 15                         # Sync every 15 minutes
+  dry_run: true                                # Set to false for actual sync
+  sync_groups: true                            # Include AD group memberships
+  max_users: 100                               # Limit for testing (0 = no limit)
